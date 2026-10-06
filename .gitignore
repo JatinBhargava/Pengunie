@@ -1,0 +1,8 @@
+.DS_Store
+.idea/
+.vscode/
+*.iml
+.env
+.env.local
+**/.env.local
+backend/data/

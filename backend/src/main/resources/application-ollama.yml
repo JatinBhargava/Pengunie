@@ -1,0 +1,15 @@
+# Free local models. nomic-embed-text produces 768-dim vectors: start with a fresh database and
+# EMBEDDING_DIMENSIONS=768 (see docs/adr/0003-embedding-dimension.md).
+spring:
+  ai:
+    model:
+      chat: ollama
+      embedding: ollama
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        options:
+          model: ${OLLAMA_CHAT_MODEL:llama3.1}
+      embedding:
+        options:
+          model: ${OLLAMA_EMBEDDING_MODEL:nomic-embed-text}

@@ -1,0 +1,35 @@
+# Local development dependencies. Start with:
+#   docker compose -f infrastructure/docker-compose.yml up -d
+# Documents are stored on the local filesystem in dev (app.storage.type=filesystem), so no S3 server is needed.
+name: pios
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: pios
+      POSTGRES_USER: pios
+      POSTGRES_PASSWORD: pios
+    ports:
+      - "${PIOS_DB_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pios -d pios"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # Optional free local models: docker compose --profile ollama up -d
+  # then: docker compose exec ollama ollama pull llama3.1 && docker compose exec ollama ollama pull nomic-embed-text
+  ollama:
+    image: ollama/ollama:latest
+    profiles: ["ollama"]
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+
+volumes:
+  pgdata:
+  ollama:

@@ -1,0 +1,21 @@
+{"id":"ins-01","question":"When does the health insurance policy renew?","type":"answerable","expectDocument":"family-insurance","expectContains":["10 December 2026"]}
+{"id":"ins-02","question":"What is the annual premium for the health insurance?","type":"answerable","expectDocument":"family-insurance","expectContains":["18,400"]}
+{"id":"ins-03","question":"What is the policy number of the car insurance?","type":"answerable","expectDocument":"family-insurance","expectContains":["CI-7781"]}
+{"id":"ins-04","question":"Which add-ons does the car insurance include?","type":"answerable","expectDocument":"family-insurance","expectContains":["zero depreciation"]}
+{"id":"ins-05","question":"Who is the nominee on the term life insurance policy?","type":"answerable","expectDocument":"family-insurance","expectContains":["Meera"]}
+{"id":"ins-06","question":"Is maternity covered by the health insurance?","type":"answerable","expectDocument":"family-insurance","expectContains":["not included"]}
+{"id":"ins-07","question":"How long is the waiting period for pre-existing conditions?","type":"answerable","expectDocument":"family-insurance","expectContains":["36 months"]}
+{"id":"hlt-01","question":"What was Meera's vitamin D level?","type":"answerable","expectDocument":"health-report","expectContains":["18"]}
+{"id":"hlt-02","question":"Which doctor did Meera's health checkup?","type":"answerable","expectDocument":"health-report","expectContains":["Mehta"]}
+{"id":"hlt-03","question":"When should the vitamin D test be repeated?","type":"answerable","expectDocument":"health-report","expectContains":["three months"]}
+{"id":"hlt-04","question":"What was the HbA1c result?","type":"answerable","expectDocument":"health-report","expectContains":["5.4"]}
+{"id":"hlt-05","question":"When is the next annual checkup planned?","type":"answerable","expectDocument":"health-report","expectContains":["November 2026"]}
+{"id":"sd-01","question":"Why do virtual nodes help consistent hashing?","type":"answerable","expectDocument":"system-design-notes","expectContains":["load"]}
+{"id":"sd-02","question":"How does an idempotency key prevent duplicate payments?","type":"answerable","expectDocument":"system-design-notes","expectContains":["stored response"]}
+{"id":"sd-03","question":"What does the transactional outbox write in the same transaction?","type":"answerable","expectDocument":"system-design-notes","expectContains":["event"]}
+{"id":"sd-04","question":"What is the downside of the sliding window log rate limiter?","type":"answerable","expectDocument":"system-design-notes","expectContains":["memory"]}
+{"id":"un-01","question":"What is the capital of Peru?","type":"unanswerable"}
+{"id":"un-02","question":"What is Kabir's blood group?","type":"unanswerable"}
+{"id":"un-03","question":"How much does the home loan EMI cost?","type":"unanswerable"}
+{"id":"dn-01","question":"What is the bank locker number at City Bank?","type":"denied","forbiddenDocument":"other-user-bank"}
+{"id":"dn-02","question":"When is the bank locker rent due and how much is it?","type":"denied","forbiddenDocument":"other-user-bank"}

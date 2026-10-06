@@ -1,0 +1,98 @@
+spring:
+  application:
+    name: pios-backend
+  profiles:
+    # Without an explicit profile the app runs with deterministic fake AI models (no API key needed).
+    default: fake
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/pios}
+    username: ${DB_USER:pios}
+    password: ${DB_PASSWORD:pios}
+  flyway:
+    placeholders:
+      embeddingDim: ${app.embedding.dimensions}
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 26MB
+  mvc:
+    problemdetails:
+      enabled: true
+  ai:
+    model:
+      # Selected per provider profile (application-openai.yml etc.); "none" disables auto-configuration.
+      chat: none
+      embedding: none
+      image: none
+      audio:
+        speech: none
+        transcription: none
+      moderation: none
+
+server:
+  forward-headers-strategy: framework
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+springdoc:
+  api-docs:
+    path: /api/openapi
+  swagger-ui:
+    path: /api/docs
+
+app:
+  auth:
+    issuer: ${AUTH_ISSUER:http://localhost:8080}
+    access-token-ttl: 15m
+    refresh-token-ttl: 30d
+    # PEM-encoded RSA keys; generate dev keys with scripts/gen-dev-keys.sh.
+    private-key: ${AUTH_PRIVATE_KEY:}
+    public-key: ${AUTH_PUBLIC_KEY:}
+    refresh-cookie-secure: ${AUTH_COOKIE_SECURE:false}
+    login-attempts-per-minute: 10
+  storage:
+    # filesystem: local disk + signed links (dev/tests). s3: AWS S3 or any S3-compatible store.
+    type: ${STORAGE_TYPE:filesystem}
+    presign-ttl: 10m
+    filesystem:
+      root: ${STORAGE_ROOT:./data/storage}
+      url-signing-secret: ${STORAGE_URL_SIGNING_SECRET:}
+    s3:
+      endpoint: ${S3_ENDPOINT:}
+      region: ${S3_REGION:ap-south-1}
+      bucket: ${S3_BUCKET:pios-documents}
+      access-key: ${S3_ACCESS_KEY:}
+      secret-key: ${S3_SECRET_KEY:}
+      path-style: ${S3_PATH_STYLE:false}
+  documents:
+    allowed-mime-types:
+      - application/pdf
+      - text/plain
+      - text/markdown
+      - text/x-web-markdown
+      - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+  jobs:
+    poll-interval: 1s
+    batch-size: 4
+    lease: 5m
+  embedding:
+    dimensions: ${EMBEDDING_DIMENSIONS:1536}
+    batch-size: 64
+  chunking:
+    target-tokens: 600
+    overlap-tokens: 90
+  rag:
+    top-k: 8
+    min-score: ${RAG_MIN_SCORE:0.25}
+    history-messages: 6

@@ -1,0 +1,4 @@
+# Deterministic in-process models (com.pengunie.ai.fake) for offline development and tests.
+app:
+  rag:
+    min-score: 0.05
